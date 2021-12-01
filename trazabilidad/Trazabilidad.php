@@ -15,10 +15,13 @@ class Trazabilidad {
      * @return array Datos del registro
      */
     public static function getAllDay() {
+        $consulta = "SELECT Event, COUNT(*) AS contadores FROM ".$tskTableName." where ".$complementoSql1." GROUP BY Event";
+        /*
         $consulta = "SELECT tmp.cantidad as standard, ordenes.cantidad as cantidad_orden,m.nombre_maquina, m.numero_maquina, u.nombre,u.apellido_paterno,u.apellido_materno,ordenes.fecha, tmp.idTrazabilidadMateriaPrima, ordenes.numeroOrden, e.numeroOperacion,e.descripcion_operacion,mp.descripcion_materiaprima, "
                 . "tmp.fechaMateriaPrima FROM trazabilidad_materiaprima as tmp inner join ordenes on tmp.idOrden=ordenes.idOrden "
                 . "inner join materia_prima as mp on tmp.idMateriaPrima = mp.idMateriaPrima inner join etapas as e on tmp.idEtapa = e.idEtapa "
                 . "inner join usuarios as u on tmp.idUsuario = u.idUsuario inner join maquinas as m on tmp.idMaquina = m.idMaquina where DATE(fechaEscaneo) = DATE(NOW())";
+         */
         try {
             $comando = Database::getInstance()->getDb()->prepare($consulta);
             $comando->execute();
